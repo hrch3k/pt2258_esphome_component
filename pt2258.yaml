@@ -30,7 +30,7 @@ wifi:
 
 
 external_components:
-  - source: my_components
+  - source: components
 
 
 # PT2258 Component
