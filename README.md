@@ -136,7 +136,7 @@ number:
 
 ## References
 
-- [**PT2258 Datasheet**]([https://download.mikroe.com/documents/datasheets/PT2258.pdf])
+- [**PT2258 Datasheet**](https://download.mikroe.com/documents/datasheets/PT2258.pdf)
 - [**ESPHome Documentation**](https://esphome.io)
 
 ## License
