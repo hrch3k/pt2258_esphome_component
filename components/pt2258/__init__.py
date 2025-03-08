@@ -9,7 +9,7 @@ DEPENDENCIES = ["i2c"]
 CODEOWNERS = ["@hrch3k"]
 
 
-# Establish a namespace for the PT2323 component
+# Establish a namespace for the PT2258 component
 pt2258_ns = cg.esphome_ns.namespace("pt2258")
 
 # Define the PT2258Component class, inheriting from PollingComponent and I2CDevice
@@ -26,7 +26,7 @@ CONFIG_SCHEMA = (
         }
     )
     .extend(cv.polling_component_schema("60s")) # Set polling interval
-    .extend(i2c.i2c_device_schema(0x46))  # PT2323 I2C address
+    .extend(i2c.i2c_device_schema(0x46))  # PT2258 I2C address
 )
 
 # Function to convert YAML configuration to C++ code
