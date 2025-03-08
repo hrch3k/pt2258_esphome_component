@@ -2,7 +2,7 @@
 
 ## Overview
 
-This is an ESPHome custom component for interfacing with the **PT2258** digital potentiometer via **I2C**. The PT2258 is a 6-channel electronic volume controller, making it ideal for audio applications such as AV surround sound systems, car audio, and multimedia speakers.
+This is an ESPHome custom component for interfacing with the **PT2258** digital potentiometer via **I2C**. The PT2258 is a 6-channel electronic volume controller, making it ideal for audio applications such as AV surround sound systems, car audio, and multimedia speakers. I have used it for "smart" audio mixer in Home Assistant 
 
 ## Features
 
