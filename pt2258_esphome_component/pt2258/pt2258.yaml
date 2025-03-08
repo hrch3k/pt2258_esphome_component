@@ -1,0 +1,119 @@
+esphome:
+  name: pt2258-volume-control
+  friendly_name: Audio Mixer  
+
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+
+# Enable logging
+logger:
+  level: debug  # Set the logging level to debug
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: "KyDM88B9Cft6Qsbnx+xZJCiwVEEPhzNQLl2ehEJVBsc="
+
+ota:
+  password: "08684b95e3dd875791e283f12b7543a6"
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Audio-Source-Selector"
+    password: "rDfohPQKUgtF"
+
+
+external_components:
+  - source: my_components
+
+
+# PT2258 Component
+i2c:
+  sda: 21             # GPIO pin used for I2C SDA
+  scl: 22             # GPIO pin used for I2C SCL
+  scan: True          # Enables I2C device scanning on startup
+  id: pt2258_bus      # Unique identifier for the I2C bus
+
+
+pt2258:
+  id: pt2258_audio  # Unique identifier for the PT2258 component
+
+
+# Slider for volume control from HA
+number:
+  - platform: template
+    name: "channel_1_vol_slider"
+    id: "Channel1VolSlider"
+    step: 1
+    min_value: 0
+    max_value: 79
+    initial_value: 79
+    mode: slider
+    set_action:
+      then:
+        - lambda: |-
+            id(pt2258_audio).set_channel_vol(x, 0);
+            id(pt2258_audio).set_channel_vol(x, 1);
+  - platform: template
+    name: "channel_2_vol_slider"
+    id: "Channel2VolSlider"
+    step: 1
+    min_value: 0
+    max_value: 79
+    initial_value: 79
+    mode: slider
+    set_action:
+      then:
+        - lambda: |-
+            id(pt2258_audio).set_channel_vol(x, 2);
+            id(pt2258_audio).set_channel_vol(x, 3);
+  - platform: template
+    name: "channel_3_vol_slider"
+    id: "Channel3VolSlider"
+    step: 1
+    min_value: 0
+    max_value: 79
+    initial_value: 79
+    mode: slider
+    set_action:
+      then:
+        - lambda: |-
+            id(pt2258_audio).set_channel_vol(x, 4);
+            id(pt2258_audio).set_channel_vol(x, 5);
+
+# Binary sensor for a physical button
+#binary_sensor:
+#  - platform: gpio
+#    pin:
+#      number: 15                # GPIO pin connected to the button
+#      mode: INPUT_PULLUP        # Configure the pin mode
+#    name: "Button"              # Name of the binary sensor
+#    on_press:                   # Actions to perform when the button is pressed
+#      then:
+#        - switch.toggle: output_1_switch
+#
+
+#Template switch to mute all channels PT2258
+switch:
+  - platform: template
+    name: "Mute all channels"
+    id: mute  # Unique identifier for the switch
+
+     # Actions to perform when switched on
+    turn_on_action:
+      - lambda: |-
+          id(pt2258_audio).set_mute(1);  //mute on
+          
+
+    # Actions to perform when switched on
+    turn_off_action:
+      - lambda: |-
+          id(pt2258_audio).set_mute(0);  //mute off
+
+    optimistic: true # Assume state changes are successful without confirmation
