@@ -26,7 +26,7 @@ This is an ESPHome custom component for interfacing with the **PT2258** digital 
 ### 1. Clone the Repository
 
 ```sh
-git clone https://github.com/YOUR_GITHUB_USERNAME/pt2258_esphome_component.git
+git clone https://github.com/hrch3k/pt2258_esphome_component.git
 cd pt2258_esphome_component
 ```
 
