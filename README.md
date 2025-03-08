@@ -59,7 +59,7 @@ wifi:
   password: "your_wifi_password"
 
 external_components:
-  - source: my_components
+  - source: components
 
 i2c:
   sda: 21
@@ -69,9 +69,24 @@ i2c:
 
 pt2258:
   id: pt2258_audio
+
 ```
 
-### 3. Flash the ESP
+### 3. Configure your WiFi
+
+Create **secrets.yaml** and add your SSID and password:
+
+```yaml
+
+
+# Your Wi-Fi SSID and password
+wifi_ssid: "SSID_name"
+wifi_password: "your_pasword"
+
+```
+
+
+### 4. Flash the ESP
 
 Once the ESPHome YAML is configured, compile and upload it to your ESP32:
 
